@@ -41,6 +41,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M6</version>
             </plugin>
+
         </plugins>
     </build>
 
@@ -62,6 +63,7 @@
                             </execution>
                             <execution>
                                 <id>report</id>
+                                <phase>test</phase>
                                 <goals>
                                     <goal>report</goal>
                                 </goals>
