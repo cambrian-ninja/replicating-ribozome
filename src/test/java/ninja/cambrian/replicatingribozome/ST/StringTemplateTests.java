@@ -62,6 +62,15 @@ public class StringTemplateTests {
 
     }
 
+    @Test
+    public void runRecordTest() {
+        ST st = new ST("<b>$u.id$</b>: $u.name$", '$', '$');
+        UserRec u = new UserRec(998L,"userName");
+        st.add("u",u);
+        assertEquals(u.name,"userName");
+        assertEquals(st.render(), "<b>998</b>: userName");
+    }
+
 
     public static class User {
         public int id; // template can directly access via u.id
@@ -79,6 +88,18 @@ public class StringTemplateTests {
         public String toString() {
             return id + ":" + name;
         } // u
+    }
+
+    public record UserRec(Long id, String name) {
+
+        //legacy getters - getFieldName() are required since ST doesn't know about records yet.
+        public Long getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
 }
